@@ -9,14 +9,21 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
-public class BarChart4Letters extends Application {
-    private static String name = "testinput.txt";
+import java.io.File;
+
+public class BarChart4Letters {
+    private static File inFile = null;
     final static String[] ch = {"a", "b", "c", "d",
             "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
             "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     static int[] incidences = null;
 
-    public void start(Stage stage) {
+    public BarChart4Letters(File file){
+        inFile = file;
+    }
+
+    public void startStatistic() {
+        Stage stage = new Stage();
         stage.setTitle("Bar Chart for Letters in Document");
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
@@ -27,7 +34,7 @@ public class BarChart4Letters extends Application {
         yAxis.setLabel("Incidences (%)");
 
         XYChart.Series series = new XYChart.Series();
-        series.setName("Input document : " + name);
+        series.setName("Input document : " + inFile.getName());
         for(int i=0; i<26; i++){
             series.getData().add(new XYChart.Data(ch[i], incidences[i]));
         }
@@ -37,14 +44,7 @@ public class BarChart4Letters extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        Boolean status;
-        DocumentStatistics DocStats = new DocumentStatistics();
-        status = DocStats.openDocument(name);
-        if(status == Boolean.TRUE){
-            DocStats.scanLettersInDocument();
-            incidences = DocStats.getLettersOccurringPercentage();
-        }
-        launch(args);
+    public void setIncidences(int[] values){
+        incidences = values;
     }
 }

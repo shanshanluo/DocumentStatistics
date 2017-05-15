@@ -22,12 +22,12 @@ public class Document {
         }
     }
 
-    public BufferedReader openFile4Read(String name) {
+    public BufferedReader openFile4Read(File file) {
         try {
-            bReader = new BufferedReader(new FileReader(name));
+            bReader = new BufferedReader(new FileReader(file));
             return bReader;
         } catch(Exception e){
-            System.out.println("Error : File is not existed!" + name);
+            System.out.println("Error : File is not existed!" + file.getName());
             return null;
         }
     }

@@ -1,19 +1,23 @@
+import java.io.File;
+
 /**
  * Created by x0241589 on 4/29/2017.
  */
 //import Document;
 
 public class DocumentStatistics {
+    private Document doc;
+    private int[] letterOccurrenceRate;
 
     public DocumentStatistics(){
         doc = new Document();
         letterOccurrenceRate = new int[26];
     }
 
-    public Boolean openDocument(String name){
+    public Boolean openDocument(File file){
         if(doc == null)
             return Boolean.FALSE;
-        if(doc.openFile4Read(name) != null){
+        if(doc.openFile4Read(file) != null){
             return Boolean.TRUE;
         } else {
             System.out.println("Open document error : File doesn't exist! \n");
@@ -38,6 +42,4 @@ public class DocumentStatistics {
         return letterOccurrenceRate;
     }
 
-    private Document doc;
-    private int[] letterOccurrenceRate;
 }
